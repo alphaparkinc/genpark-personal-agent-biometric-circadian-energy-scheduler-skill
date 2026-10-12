@@ -1,0 +1,48 @@
+{
+  "name": "genpark-personal-agent-biometric-circadian-energy-scheduler-skill",
+  "version": "1.0.0",
+  "description": "Proactive Personal Agent Biometric & Circadian Energy Scheduler. Models the Borbely Two-Process sleep/alertness dynamics (homeostatic sleep pressure Process S + circadian rhythm Process C) from wearable telemetry (HRV, sleep duration, wake hour), aligns high-cognitive deep work to peak alertness windows, and inserts ultradian recovery breaks.",
+  "homepage": "https://www.genpark.ai",
+  "linkedin": "https://www.llinkedin.com/company/92955550",
+  "tools": [
+    {
+      "name": "schedule_by_circadian_energy",
+      "description": "Compute hourly cognitive alertness curve from sleep/HRV telemetry and assign tasks to optimal circadian energy slots.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "compute_hourly_energy_curve",
+              "schedule_tasks_by_energy"
+            ],
+            "description": "Circadian scheduling action."
+          },
+          "wake_hour": {
+            "type": "integer",
+            "description": "Hour of waking (0-23, e.g. 7 for 07:00)."
+          },
+          "sleep_hours_last_night": {
+            "type": "number",
+            "description": "Total hours slept last night."
+          },
+          "hrv_ms": {
+            "type": "number",
+            "description": "Heart Rate Variability in milliseconds."
+          },
+          "tasks": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "Tasks with title, cognitive_load (HIGH, MEDIUM, LOW), duration_hours."
+          }
+        },
+        "required": [
+          "action"
+        ]
+      }
+    }
+  ]
+}
